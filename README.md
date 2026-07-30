@@ -5,8 +5,9 @@ This portfolio contains multiple projects that I have completed over the years. 
 
 | Name | Purpose | Status | Date | Location |
 | :--- | :--- | :--- | :--- | :--- |
-| **scanner-bot** | Transcribes the audio from police scanners based on links preset or provided by the user | In Progess |
-| 07/29/2026 | https://github.com/Bevs113/personal_portfolio/tree/main/scanner-bot |
+| **scanner-bot** | Transcribes the audio from police scanners based on links preset or provided by the user | In Progess | 07/29/2026 | https://github.com/Bevs113/personal_portfolio/tree/main/scanner-bot |
+
+
 
 
 
