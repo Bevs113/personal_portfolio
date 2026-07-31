@@ -40,6 +40,8 @@ def render_feed_html(lines):
     else:
         rows = '<div style="color:#888;">No audio transcribed yet. Click \'Start Listening\' to begin.</div>'
 
+    return f'<div style="height:{FEED_HEIGHT}px;overflow-y:auto;">{rows}</div>'
+
 def render_live_audio_player(stream_url: str):
     """Renders a custom HTML5 audio player that forces playback when triggered."""
     return f"""
