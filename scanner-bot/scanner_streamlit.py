@@ -6,8 +6,8 @@ import queue
 import threading
 import time
 import streamlit as st
-import scanner_core as core
 import streamlit.components.v1 as components
+import scanner_core as core
 
 st.set_page_config(
     page_title="Live Scanner Transcriber",
@@ -44,10 +44,18 @@ def render_feed_html(lines):
     return f'<div style="height:{FEED_HEIGHT}px;overflow-y:auto;">{rows}</div>'
 
 def render_live_audio_player(stream_url: str, should_play: bool):
-    """Renders a custom HTML5 audio player that forces playback when triggered."""
+    """
+    Renders a custom HTML5 audio player whose play/pause state tracks should_play.
+
+    IMPORTANT: this HTML must only change when stream_url or should_play changes.
+    The app auto-reruns every 2s while listening, and if this string changed on
+    every rerun, the iframe would reload and restart playback each time. Since
+    it only depends on these two stable values, it stays identical across those
+    polling reruns and keeps playing uninterrupted.
+    """
     action_js = (
-        "player,.play().catch(function(error) {"
-        "console.log('Autoplay prevented by browser, click to play manually:', error); });"
+        "player.play().catch(function(error) {"
+        "console.log('Autoplay prevented by browser, click play manually:', error); });"
         if should_play else
         "player.pause();"
     )
@@ -205,12 +213,12 @@ def main():
         st.session_state.transcripts.append(item)
 
     with col2:
-            # Add Live Audio Stream Player
+            # Live Audio Stream Player -- play/pause tracks the Start/Stop Listening button
             if stream_url:
                 st.subheader("Live Audio Stream")
                 components.html(
                     render_live_audio_player(stream_url, st.session_state.is_running),
-                    height=90
+                    height=90,
                 )
 
             st.subheader("Live Transcript Feed")
