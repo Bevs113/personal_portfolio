@@ -7,6 +7,7 @@ import threading
 import time
 import streamlit as st
 import scanner_core as core
+import streamlit.components.v1 as components
 
 st.set_page_config(
     page_title="Live Scanner Transcriber",
@@ -42,8 +43,14 @@ def render_feed_html(lines):
 
     return f'<div style="height:{FEED_HEIGHT}px;overflow-y:auto;">{rows}</div>'
 
-def render_live_audio_player(stream_url: str):
+def render_live_audio_player(stream_url: str, should_play: bool):
     """Renders a custom HTML5 audio player that forces playback when triggered."""
+    action_js = (
+        "player,.play().catch(function(error) {"
+        "console.log('Autoplay prevented by browser, click to play manually:', error); });"
+        if should_play else
+        "player.pause();"
+    )
     return f"""
     <div style="background: #1e1e1e; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
         <audio id="scanner-audio-player" controls style="width: 100%; height: 40px;">
@@ -54,9 +61,7 @@ def render_live_audio_player(stream_url: str):
     <script>
         var player = document.getElementById('scanner-audio-player');
         if (player) {{
-            player.play().catch(function(error) {{
-                console.log("Autoplay prevented by browser, manual play required:", error);
-            }});
+            {action_js}
         }}
     </script>
     """
