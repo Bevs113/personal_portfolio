@@ -17,7 +17,8 @@ from datetime import datetime
 # Preset scanner streams shared by both front-ends. Add more entries here
 # as "Name": "stream URL" to expand the list everywhere at once.
 STREAM_PRESETS = {
-    "Grand Junction": "https://audio.junctionnow.com:8000/radio.mp3",
+    "Grand Junction, CO": "https://audio.junctionnow.com:8000/radio.mp3",
+    "Colorado Springs, CO": "https://countypolicescanner.com/wp-content/uploads/2026/01/Coffee-County-Police-Scanner.mp3",
 }
 
 
