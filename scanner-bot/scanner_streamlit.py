@@ -208,7 +208,10 @@ def main():
             # Add Live Audio Stream Player
             if stream_url:
                 st.subheader("Live Audio Stream")
-                st.audio(stream_url, format="audio/mp3")
+                components.html(
+                    render_live_audio_player(stream_url, st.session_state.is_running),
+                    height=90
+                )
 
             st.subheader("Live Transcript Feed")
             transcript_placeholder = st.empty()
