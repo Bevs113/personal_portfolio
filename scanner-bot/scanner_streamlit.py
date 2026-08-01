@@ -228,7 +228,7 @@ def main():
 
     # Auto-refresh UI every 2 seconds if running to show incoming lines
     if st.session_state.is_running:
-        time.sleep(2)
+        time.sleep(5)
         st.rerun()
 
 
